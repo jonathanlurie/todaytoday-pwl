@@ -1,0 +1,54 @@
+.layout {
+  background: #fff;;
+  position: relative;
+  padding-bottom: 100px;
+  min-height: 100vh;
+}
+
+.app-header {
+  background: #40a9fe;
+  padding: 0;
+  /* padding-left: 50px;
+  padding-right: 50px; */
+}
+
+
+.title-passwordless {
+  color: white;
+  text-transform: uppercase;
+  font-size: min(4vmin, 2em); /* 4vmin is so that the upper right menu is still visible on narrow screens */
+  font-weight: 700;
+}
+
+.title-nextjs {
+  color: white;
+  text-transform: uppercase;
+  font-size: min(4vmin, 2em); /* 4vmin is so that the upper right menu is still visible on narrow screens */
+  font-weight: 100;
+}
+
+
+.app-footer {
+  background: #40a9fe;
+  padding: 10px 0px;
+  /* margin-top: 4em; */
+  font-size: 1em;
+  color: #00000080;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  overflow: hidden;
+  /* padding-left: 50px;
+  padding-right: 50px; */
+  text-align: center;
+}
+
+.app-footer a {
+  border-bottom: dashed 1px;
+  padding-bottom: 2px;
+}
+
+.app-footer a:hover {
+  color: #fff;
+}

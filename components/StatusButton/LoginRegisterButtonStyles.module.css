@@ -1,0 +1,16 @@
+.login-register-button {
+  color: white;
+  cursor: pointer;
+  user-select: none;
+  font-size: 1.1em;
+}
+
+
+.login-register-button span:hover {
+  color: #103b5f;
+}
+
+.separator {
+  opacity: 0.5;
+  margin: 0 10px;
+}

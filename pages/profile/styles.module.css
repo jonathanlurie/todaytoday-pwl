@@ -1,0 +1,37 @@
+.spacer {
+  width: 100%;
+  margin: 30px 0;
+}
+
+.simple-input {
+  font-size: 1.75em;
+  color: #40a9fe;
+}
+
+
+
+.simple-input input {
+  font-size: 1em;
+  color: #5e5e5e;
+  font-weight: 300;
+  padding: 5px 10px !important;
+}
+
+.simple-input input:hover {
+  background: #40a9fe3d;
+}
+
+.text-area {
+  font-family: serif;
+  font-size: 1.5em;
+  color: #5e5e5e;
+  margin: 1em 0;
+}
+
+.profile-picture {
+  border-radius: 50%;
+}
+
+.codemirror-wrapper {
+  border: solid 1px #ddd;
+}
