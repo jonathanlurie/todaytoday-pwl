@@ -106,4 +106,48 @@ export default class SDK {
     window.location.href = redirectUrl
   }
 
+
+
+  static async getDaylog(username, year, month, day) {
+    const accessToken = AccessToken.get()
+    const headers = {}
+
+    if (accessToken) {
+      headers['Authorization'] = `Bearer ${accessToken}`
+    }
+
+    const res = await fetch(`/api/daylog?username=${username}&year=${year}&month=${month}&day=${day}`, {
+      method: 'GET',
+      headers,
+    })
+
+    
+    const json = await res.json()
+    return json
+  }
+
+
+
+  static async postDaylog(text, year, month, day) {
+    const accessToken = AccessToken.get()
+    const headers = {
+      'Content-Type': 'application/json',
+    }
+
+    if (accessToken) {
+      headers['Authorization'] = `Bearer ${accessToken}`
+    }
+
+    const res = await fetch('/api/daylog', {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({text, year, month, day})
+    })
+
+    const json = await res.json()
+    return json
+  }
+
 }
+
+console.log('SDK:', SDK)

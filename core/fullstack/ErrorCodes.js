@@ -85,6 +85,22 @@ const ERRORS = {
     code: 20,
     message: 'The update-email token is invalid or expired.',
   },
+  DATE_INVALID_FORMAT: {
+    code: 21,
+    message: 'The date is invalid.',
+  },
+  DATE_MISSING_ELEMENT: {
+    code: 22,
+    message: 'The date must contain a year, month and a day.',
+  },
+  DAYLOG_UNAUTHORIZED: {
+    code: 23,
+    message: 'The entry for this day is private.',
+  },
+  USERNAME_MISSING: {
+    code: 24,
+    message: 'A username is required.',
+  },
 }
 
 

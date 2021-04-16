@@ -1,5 +1,7 @@
 import mongoose from 'mongoose'
 import User from './models/User'
+import Daylog from './models/Daylog'
+
 // import ErrorCodes from '../../core/fullstack/ErrorCodes'
 // import ErrorWithCode from '../fullstack/ErrorWithCode'
 

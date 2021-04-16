@@ -30,8 +30,8 @@ export default class AppLayout extends React.Component {
               <Col>
               
                 <Link href='/'><a>
-                <span className={Styles['title-passwordless']}>Passwordless</span>
-                <span className={Styles['title-nextjs']}>Nextjs</span>
+                <span className={Styles['title-passwordless']}>today</span>
+                <span className={Styles['title-nextjs']}>today</span>
                 </a></Link>
               </Col>
 
