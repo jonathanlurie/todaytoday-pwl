@@ -29,37 +29,53 @@ const handler = nc()
 
     console.log('req.query: ', req.query)
 
-    if (req.query.username) {
+    if (!req.query.username) {
       res.statusCode = 417
       return res.json({data: null, error: ErrorCodes.USERNAME_MISSING.code})
     }
 
-    if (!('year' in req.query && 'month' in req.query && 'day' in req.query)) {
-      res.statusCode = 417
-      return res.json({data: null, error: ErrorCodes.DATE_MISSING_ELEMENT.code})
-    }
-
-    if (isNaN(Date.parse(`${req.query.year}-${req.query.month}-${req.query.day}`))) {
-      res.statusCode = 417
-      return res.json({data: null, error: ErrorCodes.DATE_INVALID_FORMAT.code})
-    }
+    // if (!('year' in req.query && 'month' in req.query && 'day' in req.query)) {
+    //   res.statusCode = 417
+    //   return res.json({data: null, error: ErrorCodes.DATE_MISSING_ELEMENT.code})
+    // }
 
     const username = req.query.username.trim().toLowerCase()
-    // getting the daylog
-    const daylog = await Daylog.findByUsernameAndDay(username, req.query.year, req.query.month, req.query.day)
 
-    if (!daylog) {
+    // we are looking for a particular day
+    if (req.query.year && req.query.month && req.query.day) {
+      
+      // make sure it's a valid date
+      if (isNaN(Date.parse(`${req.query.year}-${req.query.month}-${req.query.day}`))) {
+        res.statusCode = 417
+        return res.json({data: null, error: ErrorCodes.DATE_INVALID_FORMAT.code})
+      }
+
+      // getting the daylog
+      const daylog = await Daylog.findByUsernameAndDay(username, req.query.year, req.query.month, req.query.day)
+
+      if (!daylog) {
+        res.statusCode = 200
+        return res.json({data: null, error: null})
+      }
+
+      if (!daylog.isPublic && req.user.username !== username) {
+        res.statusCode = 403
+        return res.json({data: null, error: ErrorCodes.DAYLOG_UNAUTHORIZED.code})
+      }
+
       res.statusCode = 200
-      return res.json({data: null, error: null})
+      return res.json({data: daylog.strip(), error: null})
+
+    } else 
+    // we want all the daylogs of a given month (on a given year)
+    if (req.query.year && req.query.month) {
+      const daylogs = await Daylog.listByUsernameAndMonth(username, req.query.year, req.query.month)
+      res.statusCode = 200
+      return res.json({data: daylogs, error: null})
     }
 
-    if (!daylog.isPublic && req.user.username !== username) {
-      res.statusCode = 403
-      return res.json({data: null, error: ErrorCodes.DAYLOG_UNAUTHORIZED.code})
-    }
-
-    res.statusCode = 200
-    return res.json({data: daylog.strip(), error: null})
+    res.statusCode = 417
+    return res.json({data: null, error: ErrorCodes.DATE_MISSING_ELEMENT.code})
   })
 
 

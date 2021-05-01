@@ -108,7 +108,7 @@ export default class SDK {
 
 
 
-  static async getDaylog(username, year, month, day) {
+  static async getDaylog(username, year = null, month = null, day = null) {
     const accessToken = AccessToken.get()
     const headers = {}
 
@@ -116,7 +116,21 @@ export default class SDK {
       headers['Authorization'] = `Bearer ${accessToken}`
     }
 
-    const res = await fetch(`/api/daylog?username=${username}&year=${year}&month=${month}&day=${day}`, {
+    let url = `/api/daylog?username=${username}`
+
+    if (year) {
+      url += `&year=${year}`
+    }
+
+    if (month) {
+      url += `&month=${month}`
+    }
+
+    if (day) {
+      url += `&day=${day}`
+    }
+
+    const res = await fetch(url, {
       method: 'GET',
       headers,
     })

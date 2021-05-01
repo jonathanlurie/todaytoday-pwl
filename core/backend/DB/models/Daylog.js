@@ -85,8 +85,31 @@ function init() {
     }
   }
 
+
+  /**
+   * List the daylogs for a given user:year:month, does not fetch the text content
+   * @param {*} username 
+   * @param {*} year 
+   * @param {*} month 
+   * @returns 
+   */
+  daylogSchema.statics.listByUsernameAndMonth = async function(username, year, month) {
+    let daylogs = await Daylog.find({ username, year, month }, '-text')
+    daylogs = daylogs.map((dl) => {
+      const strippedDl = dl.toObject({flattenMaps: true, versionKey: false})
+      delete strippedDl._id
+      return strippedDl
+    })
+    
+    return daylogs
+  }
+
+
   const Daylog = mongoose.model('Daylog', daylogSchema)
 }
+
+
+
 
 
 if (!process.browser && !mongoose.models.Daylog) {
