@@ -105,6 +105,18 @@ function init() {
   }
 
 
+  daylogSchema.statics.listByUsernameAndYear = async function(username, year) {
+    let daylogs = await Daylog.find({ username, year }, '-text')
+    daylogs = daylogs.map((dl) => {
+      const strippedDl = dl.toObject({flattenMaps: true, versionKey: false})
+      delete strippedDl._id
+      return strippedDl
+    })
+    
+    return daylogs
+  }
+
+
   const Daylog = mongoose.model('Daylog', daylogSchema)
 }
 

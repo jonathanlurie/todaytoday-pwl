@@ -34,11 +34,6 @@ const handler = nc()
       return res.json({data: null, error: ErrorCodes.USERNAME_MISSING.code})
     }
 
-    // if (!('year' in req.query && 'month' in req.query && 'day' in req.query)) {
-    //   res.statusCode = 417
-    //   return res.json({data: null, error: ErrorCodes.DATE_MISSING_ELEMENT.code})
-    // }
-
     const username = req.query.username.trim().toLowerCase()
 
     // we are looking for a particular day
@@ -72,7 +67,15 @@ const handler = nc()
       const daylogs = await Daylog.listByUsernameAndMonth(username, req.query.year, req.query.month)
       res.statusCode = 200
       return res.json({data: daylogs, error: null})
+    } else 
+
+    // only with the year
+    if (req.query.year) {
+      const daylogs = await Daylog.listByUsernameAndYear(username, req.query.year)
+      res.statusCode = 200
+      return res.json({data: daylogs, error: null})
     }
+
 
     res.statusCode = 417
     return res.json({data: null, error: ErrorCodes.DATE_MISSING_ELEMENT.code})

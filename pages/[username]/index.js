@@ -13,6 +13,7 @@ import AppLayout from '../../components/AppLayout'
 import ProfilePicture from '../../components/ProfilePicture'
 import initDB from '../../core/backend/DB'
 import Styles from './styles.module.css'
+import DaylogYearlyCalendar from '../../components/DaylogYearlyCalendar'
 // const { TextArea } = Input
 
 
@@ -66,6 +67,9 @@ class UserPage extends React.Component {
               {`@${data.username}`}
             </Col>
           </Row>
+
+          <DaylogYearlyCalendar/>
+
           <Divider>
             <Space>
               {
