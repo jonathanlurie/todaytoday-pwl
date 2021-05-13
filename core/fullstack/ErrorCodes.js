@@ -101,6 +101,10 @@ const ERRORS = {
     code: 24,
     message: 'A username is required.',
   },
+  DAYLOG_INEXISTING: {
+    code: 25,
+    message: 'The entry for this day does not exist.',
+  },
 }
 
 
